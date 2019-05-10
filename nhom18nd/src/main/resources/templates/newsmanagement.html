@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+
+</head>
+<body>
+	<!-- Phần header -->
+	<header>
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-lg-6 col-md-6 col-sm-6 col-6 header-top-left no-padding">
+						<ul>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+						</ul>
+					</div>
+					<div
+						class="col-lg-6 col-md-6 col-sm-6 col-6 header-top-right no-padding">
+						<ul>
+							<li><a href="tel:+033 697 08 95"><span
+									class="lnr lnr-phone-handset"></span><span>+033 697 08
+										95</span></a></li>
+							<li><a href="mailto:thiennguyen.it.ute@gmail.com"><span
+									class="lnr lnr-envelope"></span><span>thiennguyen.it.ute@.com</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="logo-wrap">
+			<div class="container">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-lg-4 col-md-4 col-sm-12 logo-left no-padding">
+						<a th:href="@{/}"> <img class="img-fluid"
+							src="../static/img/VnExpress_logo.png"
+							th:src="@{/img/VnExpress_logo.png}" alt="">
+						</a>
+					</div>
+					<div
+						class="col-lg-8 col-md-4 col-sm-12 logo-right no-padding ads-banner">
+						<img class="img-fluid" src="../static/img/quangcao.jpg"
+							th:src="@{/img/quangcao.jpg}" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container main-menu" id="main-menu">
+			<div class="row align-items-center justify-content-between">
+
+
+				<nav id="nav-menu-container">
+
+					<ul class="nav-menu">
+						<li><a href="#"></a></li>
+					</ul>
+				</nav>
+				<!-- #nav-menu-container -->
+
+				<div class="navbar-right">
+					<h4 style="color: white;">
+						<span>Nhà báo: </span><span th:text="${session.user.fullname}"></span>
+					</h4>
+				</div>
+				<form th:action="@{/home/logout}" method="GET">
+
+					<input style="margin-right: 10px;" type="submit"
+						class="btn btn-primary" value="Đăng xuất" />
+
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- End header -->
+	<div class="container main-content list">
+		<div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true"></span>
+			</button>
+			<span th:text="${success}"></span>
+		</div>
+		<div class="row">
+			<a th:href="@{/news/create}" class="btn btn-success pull-left"> <span
+				class="fa fa-plus"></span> Create News
+			</a>
+
+		</div>
+		<th:block th:if="${#lists.isEmpty(newsbyauthor)}">
+			<h3>No News</h3>
+		</th:block>
+
+		<th:block th:unless="${#lists.isEmpty(newsbyauthor)}">
+			<div class="row">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Name</th>
+							<th>Image</th>
+							<th>Category News</th>
+
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="contact,iterStat : ${newsbyauthor}">
+							<td th:text="${iterStat.count}"></td>
+							<td th:text="${contact.name}"></td>
+							<td th:text="${contact.image}"></td>
+							<td th:text="${contact.categoryNews.name}"></td>
+
+							<td><a th:href="@{/news/{id}/edit(id=${contact.id})}"><span
+									class="fa fa-pencil"></span></a></td>
+
+							<td><a th:href="@{/news/{id}/delete(id=${contact.id})}"><span
+									class="fa fa-trash"></span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+		</th:block>
+	</div>
+	<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

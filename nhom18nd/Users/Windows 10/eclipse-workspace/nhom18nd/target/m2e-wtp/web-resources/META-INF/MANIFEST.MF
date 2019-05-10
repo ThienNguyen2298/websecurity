@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: nhom18nd
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Windows 10
+Implementation-Vendor-Id: com.example
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/nhom18nd
+Created-By: Maven Integration for Eclipse
+
